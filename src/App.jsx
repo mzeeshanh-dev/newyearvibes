@@ -8,66 +8,59 @@ function App() {
   const [isFull, setIsFull] = useState(false);
   const [isNewYear, setIsNewYear] = useState(false);
 
-  // ✅ FIXED TARGET DATE (LOCKED)
   const targetDateRef = useRef(
-    new Date(`January 1, 2026 00:00:00`).getTime()
+    new Date('January 1, 2026 00:00:00').getTime()
   );
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
-  // ✅ TIME CALCULATION
   function calculateTimeLeft() {
-    const difference = targetDateRef.current - Date.now();
-
-    if (difference <= 0) return null;
+    const diff = targetDateRef.current - Date.now();
+    if (diff <= 0) return null;
 
     return {
-      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((difference / (1000 * 60)) % 60),
-      seconds: Math.floor((difference / 1000) % 60),
+      days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((diff / (1000 * 60)) % 60),
+      seconds: Math.floor((diff / 1000) % 60),
     };
   }
 
-  // ✅ CONFETTI ON PAGE LOAD (3 TIMES)
+  //  CONFETTI ON PAGE LOAD (3 TIMES)
   useEffect(() => {
-    const bursts = [0, 500, 1000];
-
-    bursts.forEach((delay) => {
+    [0, 500, 1000].forEach(delay => {
       setTimeout(() => {
         confetti({
           particleCount: 120,
-          spread: 90,
+          spread: 100,
           origin: { y: 0.7 },
         });
       }, delay);
     });
   }, []);
 
-  // ✅ COUNTDOWN TIMER
   useEffect(() => {
     const timer = setInterval(() => {
-      const updatedTime = calculateTimeLeft();
+      const updated = calculateTimeLeft();
 
-      if (!updatedTime) {
+      if (!updated) {
         setIsNewYear(true);
         clearInterval(timer);
 
-        // 🎉 NEW YEAR CONFETTI
         confetti({
           particleCount: 300,
           spread: 140,
           origin: { y: 0.6 },
         });
       } else {
-        setTimeLeft(updatedTime);
+        setTimeLeft(updated);
       }
     }, 1000);
 
     return () => clearInterval(timer);
   }, []);
 
-  // FULLSCREEN LOGIC
+
   const toggleFullScreen = () => {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen();
@@ -81,19 +74,27 @@ function App() {
   return (
     <>
       <div className="container">
-        {/* Fullscreen Button */}
+
         <button className="fullscreen-btn" onClick={toggleFullScreen}>
-          {isFull ? '⤢' : '⤢'}
+          {isFull ? (
+
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M8 3v5H3M16 3v5h5M8 21v-5H3M16 21v-5h5" />
+            </svg>
+          ) : (
+
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+            </svg>
+          )}
         </button>
 
-        {/* Snowfall */}
         <Snowfall
           color="white"
           snowflakeCount={200}
           style={{ position: 'fixed', width: '100%', height: '100%' }}
         />
 
-        {/* Card */}
         <div className="glass-card">
           <h1 className="title">
             {isNewYear ? '🎉 Happy New Year 2026! 🎉' : 'Counting Down to 2026'}
@@ -124,7 +125,6 @@ function App() {
           )}
         </div>
 
-        {/* Footer */}
         <div className="footer">
           Made with ❤️ by{' '}
           <a
