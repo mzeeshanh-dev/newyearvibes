@@ -1,0 +1,94 @@
+import React, { useState, useEffect } from 'react';
+import Snowfall from 'react-snowfall';
+import './App.css';
+
+function App() {
+  const [isFull, setIsFull] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  // Timer Logic
+  function calculateTimeLeft() {
+    const nextYear = new Date().getFullYear() + 1;
+    const difference = +new Date(`January 1, ${nextYear} 00:00:00`) - +new Date();
+
+    let timeLeft = {};
+    if (difference > 0) {
+      timeLeft = {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    }
+    return timeLeft;
+  }
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Fullscreen Logic
+  const toggleFullScreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+      setIsFull(true);
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+        setIsFull(false);
+      }
+    }
+  };
+
+  return (
+    <div className="container">
+      {/* Fullscreen Icon Button at Top Right */}
+      <button className="fullscreen-btn" onClick={toggleFullScreen}>
+        {isFull ? (
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 3v5H3M16 3v5h5M8 21v-5H3M16 21v-5h5" /></svg>
+        ) : (
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
+        )}
+      </button>
+
+      <Snowfall
+        color="white"
+        snowflakeCount={200}
+        style={{ position: 'fixed', width: '100%', height: '100%' }}
+      />
+
+      <div className="glass-card">
+        <h1 className="title">Counting Down to 2026</h1>
+
+        <div className="timer-container">
+          <div className="time-box">
+            <span className="time-num">{timeLeft.days || '0'}</span>
+            <span className="time-label">Days</span>
+          </div>
+          <div className="time-box">
+            <span className="time-num">{timeLeft.hours || '0'}</span>
+            <span className="time-label">Hours</span>
+          </div>
+          <div className="time-box">
+            <span className="time-num">{timeLeft.minutes || '0'}</span>
+            <span className="time-label">Mins</span>
+          </div>
+          <div className="time-box">
+            <span className="time-num">{timeLeft.seconds || '0'}</span>
+            <span className="time-label">Secs</span>
+          </div>
+        </div>
+
+        <p className="message">
+          Reflecting on the code written, the bugs squashed, <br />
+          and the innovations yet to come. Happy New Year! 🥂
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export default App;
