@@ -88,24 +88,31 @@ function App() {
         <h1 className="title">{isNewYear ? '🎉 Happy New Year 2026! 🎉' : 'Counting Down to 2026'}</h1>
 
         {!isNewYear && (
-          <div className="timer-container">
-            <div className="time-box">
-              <span className="time-num">{timeLeft.days || '0'}</span>
-              <span className="time-label">Days</span>
+          <>
+            <div className="timer-container">
+              <div className="time-box">
+                <span className="time-num">{timeLeft.days || '0'}</span>
+                <span className="time-label">Days</span>
+              </div>
+              <div className="time-box">
+                <span className="time-num">{timeLeft.hours || '0'}</span>
+                <span className="time-label">Hours</span>
+              </div>
+              <div className="time-box">
+                <span className="time-num">{timeLeft.minutes || '0'}</span>
+                <span className="time-label">Mins</span>
+              </div>
+              <div className="time-box">
+                <span className="time-num">{timeLeft.seconds || '0'}</span>
+                <span className="time-label">Secs</span>
+              </div>
             </div>
-            <div className="time-box">
-              <span className="time-num">{timeLeft.hours || '0'}</span>
-              <span className="time-label">Hours</span>
-            </div>
-            <div className="time-box">
-              <span className="time-num">{timeLeft.minutes || '0'}</span>
-              <span className="time-label">Mins</span>
-            </div>
-            <div className="time-box">
-              <span className="time-num">{timeLeft.seconds || '0'}</span>
-              <span className="time-label">Secs</span>
-            </div>
-          </div>
+
+            <p className="message">
+              Reflecting on the code written, the bugs squashed,<br />
+              and the innovations yet to come. Happy New Year! 🥂
+            </p>
+          </>
         )}
 
         {isNewYear && (
