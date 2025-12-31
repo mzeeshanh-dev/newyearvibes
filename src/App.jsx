@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Snowfall from 'react-snowfall';
+import confetti from 'canvas-confetti';
 import './App.css';
 
 function App() {
   const [isFull, setIsFull] = useState(false);
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const [isNewYear, setIsNewYear] = useState(false);
 
   // Timer Logic
   function calculateTimeLeft() {
@@ -25,8 +27,27 @@ function App() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
+      const newTime = calculateTimeLeft();
+      setTimeLeft(newTime);
+
+      // Check if countdown finished
+      if (
+        newTime.days === undefined &&
+        newTime.hours === undefined &&
+        newTime.minutes === undefined &&
+        newTime.seconds === undefined
+      ) {
+        setIsNewYear(true);
+        // Fireworks/confetti
+        confetti({
+          particleCount: 200,
+          spread: 120,
+          origin: { y: 0.6 },
+        });
+        clearInterval(timer); // stop interval
+      }
     }, 1000);
+
     return () => clearInterval(timer);
   }, []);
 
@@ -45,12 +66,15 @@ function App() {
 
   return (
     <div className="container">
-      {/* Fullscreen Icon Button at Top Right */}
       <button className="fullscreen-btn" onClick={toggleFullScreen}>
         {isFull ? (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 3v5H3M16 3v5h5M8 21v-5H3M16 21v-5h5" /></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M8 3v5H3M16 3v5h5M8 21v-5H3M16 21v-5h5" />
+          </svg>
         ) : (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+          </svg>
         )}
       </button>
 
@@ -61,31 +85,34 @@ function App() {
       />
 
       <div className="glass-card">
-        <h1 className="title">Counting Down to 2026</h1>
+        <h1 className="title">{isNewYear ? '🎉 Happy New Year 2026! 🎉' : 'Counting Down to 2026'}</h1>
 
-        <div className="timer-container">
-          <div className="time-box">
-            <span className="time-num">{timeLeft.days || '0'}</span>
-            <span className="time-label">Days</span>
+        {!isNewYear && (
+          <div className="timer-container">
+            <div className="time-box">
+              <span className="time-num">{timeLeft.days || '0'}</span>
+              <span className="time-label">Days</span>
+            </div>
+            <div className="time-box">
+              <span className="time-num">{timeLeft.hours || '0'}</span>
+              <span className="time-label">Hours</span>
+            </div>
+            <div className="time-box">
+              <span className="time-num">{timeLeft.minutes || '0'}</span>
+              <span className="time-label">Mins</span>
+            </div>
+            <div className="time-box">
+              <span className="time-num">{timeLeft.seconds || '0'}</span>
+              <span className="time-label">Secs</span>
+            </div>
           </div>
-          <div className="time-box">
-            <span className="time-num">{timeLeft.hours || '0'}</span>
-            <span className="time-label">Hours</span>
-          </div>
-          <div className="time-box">
-            <span className="time-num">{timeLeft.minutes || '0'}</span>
-            <span className="time-label">Mins</span>
-          </div>
-          <div className="time-box">
-            <span className="time-num">{timeLeft.seconds || '0'}</span>
-            <span className="time-label">Secs</span>
-          </div>
-        </div>
+        )}
 
-        <p className="message">
-          Reflecting on the code written, the bugs squashed, <br />
-          and the innovations yet to come. Happy New Year! 🥂
-        </p>
+        {isNewYear && (
+          <p className="message">
+            Wishing you a year full of growth, focus, and meaningful work!
+          </p>
+        )}
       </div>
     </div>
   );
