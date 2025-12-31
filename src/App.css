@@ -7,7 +7,6 @@
 
 body {
   overflow: hidden;
-  /* Fixes the overflow/scroll issue */
   background: #020205;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
@@ -40,7 +39,6 @@ body {
 
 .fullscreen-btn:hover {
   background: rgba(212, 175, 55, 0.2);
-  /* Subtle gold hover */
   border-color: #d4af37;
   transform: scale(1.1);
 }
@@ -89,7 +87,6 @@ body {
   font-size: 2rem;
   font-weight: 700;
   color: #d4af37;
-  /* Gold Color */
 }
 
 .time-label {
@@ -105,6 +102,27 @@ body {
   line-height: 1.6;
 }
 
+/* FOOTER */
+.footer {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  color: #fff;
+  z-index: 10;
+}
+
+.footer a {
+  color: #00acee;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* RESPONSIVE STYLES */
 @media screen and (max-width: 768px) {
   .glass-card {
     padding: 2rem;

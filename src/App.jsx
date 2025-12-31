@@ -66,6 +66,7 @@ function App() {
 
   return (
     <div className="container">
+      {/* Fullscreen Button */}
       <button className="fullscreen-btn" onClick={toggleFullScreen}>
         {isFull ? (
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -78,12 +79,14 @@ function App() {
         )}
       </button>
 
+      {/* Snowfall Effect */}
       <Snowfall
         color="white"
         snowflakeCount={200}
         style={{ position: 'fixed', width: '100%', height: '100%' }}
       />
 
+      {/* Countdown Card */}
       <div className="glass-card">
         <h1 className="title">{isNewYear ? '🎉 Happy New Year 2026! 🎉' : 'Counting Down to 2026'}</h1>
 
@@ -120,6 +123,18 @@ function App() {
             Wishing you a year full of growth, focus, and meaningful work!
           </p>
         )}
+      </div>
+
+      {/* Footer */}
+      <div className="footer">
+        Made with ❤️ by{' '}
+        <a
+          href="https://www.linkedin.com/in/m-zeeshan-haider-606bb3284/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Zeeshan
+        </a>
       </div>
     </div>
   );
