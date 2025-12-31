@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Snowfall from 'react-snowfall';
 import confetti from 'canvas-confetti';
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react"
 import './App.css';
 
 function App() {
