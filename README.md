@@ -1,16 +1,120 @@
-# React + Vite
+# 🎉 New Year 2026 Countdown App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern New Year countdown web app built with **React**, featuring a live countdown to **January 1, 2026**, snowfall animation, fullscreen mode, and celebratory confetti effects.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+- ⏳ **Live Countdown** to January 1, 2026 (locked date)
+- 🎊 **Confetti Animation**
+  - Fires **3 times on page load**
+  - Special burst when the New Year arrives
+- ❄️ **Snowfall Effect** for festive vibes
+- 🖥️ **Fullscreen Toggle**
+  - Enter & Exit fullscreen with proper icons
+- 📱 **Responsive Design** (works on mobile & desktop)
+- 📊 **Vercel Analytics** integration
+- 🧊 **Glassmorphism UI**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React**
+- **Vite**
+- **canvas-confetti**
+- **react-snowfall**
+- **Vercel Analytics**
+- **CSS (Glass UI & Responsive Design)**
+
+---
+
+## 📂 Project Structure
+
+src/
+│── App.jsx
+│── App.css
+│── main.jsx
+│── index.css
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/mzeeshanh-dev/newyearvibes.git
+cd newyearvibes
+
+2️⃣ Install Dependencies
+npm install
+
+3️⃣ Run the App
+npm run dev
+
+Open your browser at:
+http://localhost:5173
+
+🧠 How It Works
+
+Countdown is calculated using a fixed target date (Jan 1, 2026)
+
+Confetti animation:
+
+Triggers 3 bursts on initial page load
+
+Triggers a large celebration when countdown reaches zero
+
+Fullscreen mode uses the Fullscreen API
+
+Snowfall runs continuously using canvas
+
+🎨 UI Highlights
+
+Glassmorphism card with blur & transparency
+
+Animated snow overlay
+
+Clean typography and spacing
+
+Footer attribution with external profile link
+
+📱 Mobile Support
+
+Fully responsive layout
+
+Touch-friendly fullscreen button
+
+Footer stays visible on mobile devices
+
+📊 Analytics
+
+This project uses Vercel Analytics to track basic usage metrics when deployed on Vercel.
+
+🔮 Future Improvements
+
+🔔 Sound effects on New Year
+
+🌙 Dark / Light mode toggle
+
+🎆 More advanced firework animations
+
+💾 Persist animations using localStorage
+
+
+👤 Author
+
+Zeeshan Haider
+
+LinkedIn:
+👉 https://www.linkedin.com/in/m-zeeshan-haider-606bb3284/
+
+❤️ Credits
+
+Made with ❤️ using React and modern web APIs.
+
+
+📄 License
+
+This project is open-source and available under the MIT License.
